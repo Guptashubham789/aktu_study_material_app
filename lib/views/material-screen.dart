@@ -6,6 +6,7 @@ import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_card/image_card.dart';
@@ -115,6 +116,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                               Text(materialModel.material_name,style: TextStyle(fontFamily: AppConstant.appFontFamily,fontSize: 10,color: AppConstant.appTextColor),maxLines: 2,),
                                               GestureDetector(
                                                   onTap: () async{
+                                                    EasyLoading.show(status: "Please wait....");
                                                     Map<Permission, PermissionStatus> statuses = await [
                                                       Permission.storage,
                                                       //add more permission to request here.
@@ -129,6 +131,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                                         //output:  /storage/emulated/0/Download/banner.png
 
                                                         try {
+
                                                           await Dio().download(
                                                               materialModel.material_url,
                                                               savePath,
@@ -139,10 +142,12 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                                                 }
                                                               });
                                                           print("File is saved to download folder.");
+                                                          EasyLoading.dismiss();
                                                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                                             content: Text("File Downloaded"),
                                                           ));
-                                                        } on DioError catch (e) {
+
+                                                        } on DioException catch (e) {
                                                           print(e.message);
                                                         }
                                                       }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
+import 'package:studymaterialapp/views/user/auth/login-screen.dart';
 
 import '../../../constant/app-constant.dart';
 import '../../../controller/google-sign-in-controller.dart';
@@ -41,8 +42,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 10),
-                child: Text('Amazing Study App',
-                  style: TextStyle(color: Colors.black87,fontWeight: FontWeight.w100,fontSize: 12),),
+                child: GestureDetector(
+                  onTap: (){
+                    Get.to(()=>LoginScreen());
+                  },
+                  child: Text('Login',
+                    style: TextStyle(color: Colors.black87,fontWeight: FontWeight.w100,fontSize: 12),),
+                ),
               ),
               SizedBox(
                 height: Get.height/12,

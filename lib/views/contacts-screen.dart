@@ -17,6 +17,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
   TextEditingController emailController=TextEditingController();
   TextEditingController subjectController=TextEditingController();
   TextEditingController messageController=TextEditingController();
+  //admin login
 
   @override
   Widget build(BuildContext context) {
@@ -159,18 +160,8 @@ class _ContactsScreenState extends State<ContactsScreen> {
                           String email=emailController.text.trim();
                           String subject=subjectController.text.trim();
                           String message=messageController.text.trim();
-                          // String customerToken=await getCustomerDeviceToken();
-                          if(email=="1111" && name=="1111"){
-                            Get.snackbar(
-                              "Admin Panel",
-                              "Welcome to admin panel..",
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: AppConstant.appSecondaryColor,
-                              colorText: AppConstant.appTextColor,
-                            );
-                            Get.offAll(()=>AdminDashScreen());
-                          }
-                          else if(name.isEmpty || email.isEmpty || subject.isEmpty || message.isEmpty){
+
+                          if(name.isEmpty || email.isEmpty || subject.isEmpty || message.isEmpty){
                           Get.snackbar(
                           "Error",
                           "Please enter all detatils",

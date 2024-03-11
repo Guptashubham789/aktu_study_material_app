@@ -8,6 +8,7 @@ import 'package:studymaterialapp/constant/app-constant.dart';
 import 'package:studymaterialapp/views/user/all-degree-screen.dart';
 import 'package:studymaterialapp/widget/banner-widget.dart';
 
+import '../../widget/aktu-website-widget.dart';
 import '../../widget/degree-widget.dart';
 import '../../widget/drawer-widget.dart';
 import '../../widget/heading-title-widget.dart';
@@ -52,6 +53,15 @@ class _UserDashScreenState extends State<UserDashScreen> {
                 padding: const EdgeInsets.all(1.0),
                 child: BannerWidget(),
               ),
+              HeadingWidget(
+                  headingTitle: "Aktu Website",
+                  headingSubTitle: "Aktu official website is available here.." ,
+                  onTap: (){
+                    //Get.to(()=>AllDegreeScreen());
+                  },
+                  buttonText: "Link"
+              ),
+              CategoriesWidget(),
               HeadingWidget(
                   headingTitle: "Degree",
                   headingSubTitle: "All degree vise notes and book available here.." ,

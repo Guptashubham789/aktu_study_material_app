@@ -51,8 +51,10 @@ dependencies:
   url_launcher: ^6.1.14
   flutterfire_cli: ^0.2.7
   easy_pdf_viewer: ^1.0.7
+  permission_handler: ^8.1.4
   downloads_path_provider_28: ^0.1.2
-  permission_handler: ^11.0.1
+  flutter_local_notifications: ^17.0.0
+  path_provider: ^2.1.2
   dio: ^5.4.1
 
 
