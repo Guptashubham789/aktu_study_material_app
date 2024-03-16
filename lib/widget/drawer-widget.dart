@@ -11,6 +11,7 @@ import 'package:studymaterialapp/views/user/UserDashScreen.dart';
 import '../constant/app-constant.dart';
 import '../views/user/auth/user-main-screen.dart';
 import '../views/user/profile-screen.dart';
+import '../views/user/single-user-doc-screen.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -79,6 +80,19 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Text('Profile',style: TextStyle(color: AppConstant.appTextColor),),
                 leading: Icon(Icons.person,color: AppConstant.appTextColor,),
+                trailing: Icon(Icons.arrow_forward,color: AppConstant.appTextColor,),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ListTile(
+                onTap: (){
+                  Get.to(()=>AddDocumentWidget());
+
+                },
+                titleAlignment: ListTileTitleAlignment.center,
+                title: Text('Add Documents',style: TextStyle(color: AppConstant.appTextColor),),
+                leading: Icon(Icons.contacts,color: AppConstant.appTextColor,),
                 trailing: Icon(Icons.arrow_forward,color: AppConstant.appTextColor,),
               ),
             ),
