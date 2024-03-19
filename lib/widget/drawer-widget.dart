@@ -87,7 +87,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 onTap: (){
-                  Get.to(()=>AddDocumentWidget());
+                  Get.to(()=>SinglUserDocScreen());
 
                 },
                 titleAlignment: ListTileTitleAlignment.center,

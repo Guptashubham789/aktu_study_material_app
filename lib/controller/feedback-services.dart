@@ -53,3 +53,8 @@ void sendMessage({
   }
 
 }
+void deleteDocument(String documentId) async {
+  print('Doc id : $documentId');
+  await FirebaseFirestore.instance.collection('userDocument').doc(documentId).delete();
+  //Fluttertoast.showToast(msg:"Delete");
+}

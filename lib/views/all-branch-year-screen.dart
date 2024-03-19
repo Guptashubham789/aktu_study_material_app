@@ -55,59 +55,70 @@ class _AllBranchYearScreenState extends State<AllBranchYearScreen> {
             }
             //
             if(snapshot.data!=null){
-              return GridView.builder(
-                itemCount: snapshot.data!.docs.length,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 3,
-                    crossAxisSpacing: 3,
-                    childAspectRatio: 1.50
+
+              return Container(
+                height: Get.height/2,
+                child: GridView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 3,
+                      crossAxisSpacing: 3,
+                      childAspectRatio: 1.0
+                  ),
+                  itemBuilder: (context,index) {
+                    //yha par data ko hum nikal lenge jo data aa rha h use hum model ke andr convert karennge
+                    //
+                    final productData=snapshot.data!.docs[index];
+                    YearModel yearModel=YearModel(
+                        branch_id: snapshot.data!.docs[index]['branch_id'],
+                        degree_id: snapshot.data!.docs[index]['degree_id'],
+                        year_id: snapshot.data!.docs[index]['year_id'],
+                        year_name: snapshot.data!.docs[index]['year_name'],
+                        year_img: snapshot.data!.docs[index]['year_img'],
+                        branch_name: snapshot.data!.docs[index]['branch_name'],
+                        createdAt: snapshot.data!.docs[index]['createdAt']
+                    );
+                    return Expanded(
+                      child: SizedBox(
+                        height: Get.height/1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                Get.to(()=>MaterialScreen(year_id:yearModel.year_id));
+                              },
+                              child:  Padding(padding: EdgeInsets.all(10.0),
+                                child: Card(
+                                  elevation: 5,
+                                  child: Container(
+                      
+                                    child: FillImageCard(
+                                      borderRadius: 20.0,
+                                      width: Get.width / 2.5,
+                                      heightImage: Get.height / 8,
+                                      imageProvider: CachedNetworkImageProvider(
+                                          yearModel.year_img),
+                                      title: Center(child: Text(yearModel.year_name,
+                                        style: TextStyle(color: Colors.black87, fontSize: 10.0,fontFamily: "serif"),)),
+                      
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              ),
+                      
+                      
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+
                 ),
-                itemBuilder: (context,index) {
-                  //yha par data ko hum nikal lenge jo data aa rha h use hum model ke andr convert karennge
-                  //
-                  final productData=snapshot.data!.docs[index];
-                  YearModel yearModel=YearModel(
-                      branch_id: snapshot.data!.docs[index]['branch_id'],
-                      degree_id: snapshot.data!.docs[index]['degree_id'],
-                      year_id: snapshot.data!.docs[index]['year_id'],
-                      year_name: snapshot.data!.docs[index]['year_name'],
-                      year_img: snapshot.data!.docs[index]['year_img'],
-                      branch_name: snapshot.data!.docs[index]['branch_name'],
-                      createdAt: snapshot.data!.docs[index]['createdAt']
-                  );
-                  return SizedBox(
-                    height: Get.height/1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: (){
-                            Get.to(()=>MaterialScreen(year_id:yearModel.year_id));
-                          },
-                          child: Card(
-                            elevation: 10,
-                            child: FillImageCard(
-                              borderRadius: 20.0,
-                              width: Get.width / 1.1,
-                              heightImage: Get.height /4,
-                              imageProvider: CachedNetworkImageProvider(
-                                  yearModel.year_img),
-                              title: const Center(child: Text("Click Here",
-                                style: TextStyle(color: Colors.black87, fontSize: 8.0,fontFamily: "serif"),)),
-
-                            ),
-                          ),
-                          ),
-
-
-                      ],
-                    ),
-                  );
-                },
-
               );
 
             }

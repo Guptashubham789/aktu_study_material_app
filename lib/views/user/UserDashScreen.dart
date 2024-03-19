@@ -32,13 +32,16 @@ class _UserDashScreenState extends State<UserDashScreen> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: IconButton(
-            icon: Icon(Icons.logout),
+            icon: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Icon(Icons.message),
+                Text('1',style: TextStyle(color: Colors.red,fontFamily: AppConstant.appFontFamily,fontSize: 12),)
+              ],
+            ),
             onPressed: () async{
-              GoogleSignIn googleSignIn=GoogleSignIn();
-              FirebaseAuth _auth=FirebaseAuth.instance;
-              await _auth.signOut();
-              await googleSignIn.signOut();
-              Get.offAll(()=>WelcomeScreen());
+
+              //Get.offAll(()=>WelcomeScreen());
             },),
           ),
         ],

@@ -16,6 +16,27 @@ migrate_working_dir/
 *.iws
 .idea/
 
+#  Future downloadFile(int index,Reference ref)async{
+#    final url=await ref.getDownloadURL();
+#    print("pdf url : $url");
+#    final tempDir=await getTemporaryDirectory();
+#    final path=File('${tempDir.path}/${ref.name}');
+#    await Dio().download(url, path);
+#
+#    //save to gallery gallery_server:2.3.2
+#    if(url.contains('.jpg')){
+#      await GallerySaver.saveImage(path as String,toDcim: true);
+#    } else if(url.contains('.pdf')){
+#      await GallerySaver.saveImage(path as String,toDcim: true);
+#    } else if(url.contains('.png')){
+#      await GallerySaver.saveImage(path as String,toDcim: true);
+#    }
+#
+#    ScaffoldMessenger.of(context).showSnackBar(
+#      SnackBar(content: Text('Downloaded ${ref.name}')),
+#    );
+#  }
+
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.

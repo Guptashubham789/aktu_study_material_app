@@ -1,15 +1,20 @@
 
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_card/image_card.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:studymaterialapp/model/material-model.dart';
 import 'package:studymaterialapp/views/all-branch-screen.dart';
@@ -28,7 +33,7 @@ class MaterialScreen extends StatefulWidget {
 }
 
 class _MaterialScreenState extends State<MaterialScreen> {
-
+  Map<int,double> downloadProgress={};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +78,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                     childAspectRatio: 0.70
                 ),
                 itemBuilder: (context,index) {
+
                   //yha par data ko hum nikal lenge jo data aa rha h use hum model ke andr convert karennge
                   MaterialModel materialModel=MaterialModel(
                       branch_id: snapshot.data!.docs[index]['branch_id'],
@@ -116,7 +122,13 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                               Text(materialModel.material_name,style: TextStyle(fontFamily: AppConstant.appFontFamily,fontSize: 10,color: AppConstant.appTextColor),maxLines: 2,),
                                               GestureDetector(
                                                   onTap: () async{
-                                                    EasyLoading.show(status: "Please wait....");
+                                                    Get.snackbar(
+                                                      "Please wait...",
+                                                      "Hello users please wait sometimes.....!!",
+                                                      snackPosition: SnackPosition.BOTTOM,
+                                                      backgroundColor: AppConstant.appSecondaryColor,
+                                                      colorText: AppConstant.appTextColor,
+                                                    );
                                                     Map<Permission, PermissionStatus> statuses = await [
                                                       Permission.storage,
                                                       //add more permission to request here.
@@ -131,7 +143,6 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                                         //output:  /storage/emulated/0/Download/banner.png
 
                                                         try {
-
                                                           await Dio().download(
                                                               materialModel.material_url,
                                                               savePath,
@@ -151,7 +162,8 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                                           print(e.message);
                                                         }
                                                       }
-                                                    }else{
+                                                    }
+                                                    else{
                                                       print("No permission to read and write.");
                                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                                         content: Text("Permission Denied !"),
@@ -193,4 +205,5 @@ class _MaterialScreenState extends State<MaterialScreen> {
       ),
     );
   }
+
 }
